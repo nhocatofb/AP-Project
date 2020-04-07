@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1586012147 source:c:\users\admin\desktop\ahihi\demosdl\main.cpp
+	<iostream>
+	<SDL.h>
+	"SDL_utils.h"
+
+1585936222 c:\users\admin\desktop\ahihi\demosdl\sdl_utils.h
+	<SDL.h>
+	<iostream>
+
+1585936222 source:c:\users\admin\desktop\ahihi\demosdl\sdl_utils.cpp
+	"SDL_utils.h"
+
