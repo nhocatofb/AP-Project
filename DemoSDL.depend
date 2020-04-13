@@ -11,3 +11,15 @@
 1585936222 source:c:\users\admin\desktop\ahihi\demosdl\sdl_utils.cpp
 	"SDL_utils.h"
 
+1586196996 source:c:\users\admin\desktop\ahihi\ap-project\main.cpp
+	<iostream>
+	<SDL.h>
+	"SDL_utils.h"
+
+1586196996 c:\users\admin\desktop\ahihi\ap-project\sdl_utils.h
+	<SDL.h>
+	<iostream>
+
+1586196996 source:c:\users\admin\desktop\ahihi\ap-project\sdl_utils.cpp
+	"SDL_utils.h"
+
