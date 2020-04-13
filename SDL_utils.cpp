@@ -1,7 +1,5 @@
 #include "SDL_utils.h"
 
-const int SCREEN_HEIGHT = 500;
-const int SCREEN_WIDTH = 500;
 const string WINDOW_TITLE = "Demo SDL by LoAnhDuc";
 
 void logSDLError(ostream &os, const string &msg, bool fatal) {
@@ -37,3 +35,10 @@ void waitUntilKeyPressed() {
         SDL_Delay(100);
     }
 }
+
+void setBackGround(SDL_Renderer *renderer) {
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+    SDL_RenderClear(renderer);
+}
+
+
