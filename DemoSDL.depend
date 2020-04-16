@@ -1,25 +1,88 @@
 # depslib dependency file v1.0
-1586012147 source:c:\users\admin\desktop\ahihi\demosdl\main.cpp
-	<iostream>
-	<SDL.h>
+1586815459 source:c:\users\admin\desktop\ahihi\demosdl\main.cpp
 	"SDL_utils.h"
+	"player.h"
 
-1585936222 c:\users\admin\desktop\ahihi\demosdl\sdl_utils.h
-	<SDL.h>
-	<iostream>
-
-1585936222 source:c:\users\admin\desktop\ahihi\demosdl\sdl_utils.cpp
-	"SDL_utils.h"
-
-1586812066 source:c:\users\admin\desktop\ahihi\ap-project\main.cpp
-	"SDL_utils.h"
-
-1586811884 c:\users\admin\desktop\ahihi\ap-project\sdl_utils.h
+1586791026 c:\users\admin\desktop\ahihi\demosdl\sdl_utils.h
 	<SDL.h>
 	<SDL_image.h>
 	<cstring>
 	<iostream>
 
-1586811884 source:c:\users\admin\desktop\ahihi\ap-project\sdl_utils.cpp
+1586791148 source:c:\users\admin\desktop\ahihi\demosdl\sdl_utils.cpp
+	"SDL_utils.h"
+
+1586815411 source:c:\users\admin\desktop\ahihi\demosdl\player.cpp
+	"player.h"
+
+1586815439 c:\users\admin\desktop\ahihi\demosdl\player.h
+	"SDL_utils.h"
+
+1586968751 source:c:\users\admin\desktop\c++\demosdl\main.cpp
+	"SDL_utils.h"
+	"player.h"
+	"Bomb.h"
+	"Enemy.h"
+
+1586871756 c:\users\admin\desktop\c++\demosdl\sdl_utils.h
+	<SDL.h>
+	<SDL_image.h>
+	<cstring>
+	<iostream>
+
+1586967432 c:\users\admin\desktop\c++\demosdl\player.h
+	"SDL_utils.h"
+	"Bomb.h"
+
+1586967432 source:c:\users\admin\desktop\c++\demosdl\player.cpp
+	"player.h"
+
+1586791148 source:c:\users\admin\desktop\c++\demosdl\sdl_utils.cpp
+	"SDL_utils.h"
+
+1586897321 source:c:\users\admin\desktop\c++\demosdl\bomb.cpp
+	"Bomb.h"
+
+1586897346 c:\users\admin\desktop\c++\demosdl\bomb.h
+	"SDL_utils.h"
+
+1586969995 source:c:\users\admin\desktop\c++\demosdl\enemy.cpp
+	"Enemy.h"
+
+1586969619 c:\users\admin\desktop\c++\demosdl\enemy.h
+	"SDL_utils.h"
+
+1586897321 source:c:\users\admin\desktop\c++\ap-project\bomb.cpp
+	"Bomb.h"
+
+1586897346 c:\users\admin\desktop\c++\ap-project\bomb.h
+	"SDL_utils.h"
+
+1586871756 c:\users\admin\desktop\c++\ap-project\sdl_utils.h
+	<SDL.h>
+	<SDL_image.h>
+	<cstring>
+	<iostream>
+
+1586969995 source:c:\users\admin\desktop\c++\ap-project\enemy.cpp
+	"Enemy.h"
+
+1586969619 c:\users\admin\desktop\c++\ap-project\enemy.h
+	"SDL_utils.h"
+
+1586968751 source:c:\users\admin\desktop\c++\ap-project\main.cpp
+	"SDL_utils.h"
+	"player.h"
+	"Bomb.h"
+	"Enemy.h"
+
+1586967432 c:\users\admin\desktop\c++\ap-project\player.h
+	"SDL_utils.h"
+	"Bomb.h"
+
+1586967432 source:c:\users\admin\desktop\c++\ap-project\player.cpp
+	"player.h"
+
+1586791148 source:c:\users\admin\desktop\c++\ap-project\sdl_utils.cpp
 	"SDL_utils.h"
 
