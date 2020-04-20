@@ -7,8 +7,12 @@ void Player::loadTexture(string path, SDL_Renderer *renderer) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
         SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
-        sourceRect.x = desRect.x = 0;
-        sourceRect.y = desRect.y = 0;
+        desRect.x = 0;
+        desRect.y = 0;
+        sourceRect.x = 0;
+        sourceRect.y = 0;
+        //sourceRect.w /=2;
+        //sourceRect.h /=2;
         desRect.w = sourceRect.w;
         desRect.h = sourceRect.h;
 }
@@ -18,16 +22,16 @@ void Player::render(SDL_Renderer *renderer) {
 }
 
 void Player::moveRight() {
-        desRect.x +=20;
+        desRect.x +=stepX;
 }
 void Player::moveLeft() {
-        desRect.x -=20;
+        desRect.x -=stepX;
 }
 void Player::moveUp() {
-        desRect.y -=20;
+        desRect.y -=stepY;
 }
 void Player::moveDown() {
-        desRect.y +=20;
+        desRect.y +=stepY;
 }
 
 bool Player::inside(int minX, int minY, int maxX, int maxY) {

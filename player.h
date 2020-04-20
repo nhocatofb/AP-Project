@@ -9,6 +9,9 @@ struct Player{
     SDL_Rect desRect;
     SDL_Texture* texture;
     Bomb bomb;
+    int stepX=5;
+    int stepY=5;
+    bool die = false;
 
     void loadTexture(string path, SDL_Renderer *renderer);
     void render(SDL_Renderer *renderer) ;

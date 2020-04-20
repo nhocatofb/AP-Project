@@ -13,7 +13,11 @@ struct Enemy {
     void create(SDL_Renderer *renderer);
     void render(SDL_Renderer *renderer) ;
 
-    string canMove();
+    bool canMoveRight();
+    bool canMoveUp();
+    bool canMoveLeft();
+    bool canMoveDown();
+    int randomNumber();
     void move();
     void moveRight();
     void moveLeft();

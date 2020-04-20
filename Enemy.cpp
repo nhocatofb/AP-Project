@@ -7,49 +7,47 @@ void Enemy::create(SDL_Renderer *renderer) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
         SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
-        desRect.x = 0;
-        desRect.y = 0;
+        desRect.x = SCREEN_WIDTH/2;
+        desRect.y = SCREEN_HEIGHT/2;
         sourceRect.x = 0;
         sourceRect.y = 0;
-        desRect.w = sourceRect.w;
-        desRect.h = sourceRect.h;
+        desRect.w = sourceRect.w*2;
+        desRect.h = sourceRect.h*2;
 }
 
 void Enemy::render(SDL_Renderer *renderer) {
         SDL_RenderCopy(renderer, texture, &sourceRect, &desRect);
 }
 
-string Enemy::canMove() {
-    if(desRect.x<SCREEN_WIDTH) return "canMoveRight";
-    if(desRect.y>0)            return "canMoveUp";
-    if(desRect.x>0)            return "canMoveLeft";
-    if(desRect.y<SCREEN_HEIGHT)return "canMoveDown";
+int Enemy::randomNumber() {
+    srand(time(0));
+    return rand() % 4;
 }
 
 void Enemy::move() {
-    if(canMove()=="canMoveRight") moveRight();
-    else if (canMove()=="canMoveUp") moveUp();
-    else if (canMove()=="canMoveLeft") moveLeft();
-    else moveDown();
-    desRect.x += stepX*10;
-    desRect.y += stepY*10;
+    if(randomNumber() == 0 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveRight();
+    else if (randomNumber() == 1 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveUp();
+    else if (randomNumber() == 2 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveLeft();
+    else if (randomNumber() == 3 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveDown();
+    desRect.x += stepX;
+    desRect.y += stepY;
 }
 
 void Enemy::moveRight() {
-        stepX=1;
+        stepX=2;
         stepY=0;
 }
 void Enemy::moveLeft() {
-        stepX=-1;
+        stepX= -2;
         stepY=0;
 }
 void Enemy::moveUp() {
         stepX=0;
-        stepY=-1;
+        stepY=-2;
 }
 void Enemy::moveDown() {
         stepX=0;
-        stepY=1;
+        stepY=2;
 }
 
 bool Enemy::inside(int minX, int minY, int maxX, int maxY) {
