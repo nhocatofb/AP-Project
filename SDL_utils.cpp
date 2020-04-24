@@ -37,7 +37,7 @@ void waitUntilKeyPressed() {
 }
 
 void setBackGround(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+    SDL_SetRenderDrawColor(renderer, 180, 180, 180, 255);
     SDL_RenderClear(renderer);
 }
 

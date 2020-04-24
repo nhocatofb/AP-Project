@@ -11,8 +11,8 @@ void Enemy::create(SDL_Renderer *renderer) {
         desRect.y = SCREEN_HEIGHT/2;
         sourceRect.x = 0;
         sourceRect.y = 0;
-        desRect.w = sourceRect.w*2;
-        desRect.h = sourceRect.h*2;
+        desRect.w = sourceRect.w;
+        desRect.h = sourceRect.h;
 }
 
 void Enemy::render(SDL_Renderer *renderer) {

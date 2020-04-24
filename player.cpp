@@ -11,8 +11,6 @@ void Player::loadTexture(string path, SDL_Renderer *renderer) {
         desRect.y = 0;
         sourceRect.x = 0;
         sourceRect.y = 0;
-        //sourceRect.w /=2;
-        //sourceRect.h /=2;
         desRect.w = sourceRect.w;
         desRect.h = sourceRect.h;
 }

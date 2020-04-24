@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer;
     initSDL(window, renderer);
     Player player;
-    Enemy enemy1, enemy2;
+    Enemy enemy1;
     player.loadTexture("img/character.bmp", renderer);
     enemy1.create(renderer);
     while(player.die==false) {
