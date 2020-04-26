@@ -1,26 +1,35 @@
 #include "Enemy.h"
 
 void Enemy::create(SDL_Renderer *renderer) {
-        SDL_Surface* surface = SDL_LoadBMP("img/enemy.bmp");
-        Uint32 colorKey = SDL_MapRGB(surface->format, 255, 255, 255);
-        SDL_SetColorKey(surface, SDL_TRUE, colorKey);
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_FreeSurface(surface);
-        SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
-        desRect.x = SCREEN_WIDTH/2;
-        desRect.y = SCREEN_HEIGHT/2;
-        sourceRect.x = 0;
-        sourceRect.y = 0;
-        desRect.w = sourceRect.w;
-        desRect.h = sourceRect.h;
+    SDL_Surface* surface = SDL_LoadBMP(IMG.c_str());
+    Uint32 colorKey = SDL_MapRGB(surface->format, 255, 255, 255);
+    SDL_SetColorKey(surface, SDL_TRUE, colorKey);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
+    desRect.x = SCREEN_WIDTH/2;
+    desRect.y = SCREEN_HEIGHT/2;
+    for(int i=0; i<ENEMY_FRAMES; i++) {
+        clips[i].x = sourceRect.w*i/ENEMY_FRAMES;
+        clips[i].y = 0;
+        clips[i].w = sourceRect.w/ENEMY_FRAMES;
+        clips[i].h = sourceRect.h;
+    }
 }
 
 void Enemy::render(SDL_Renderer *renderer) {
-        SDL_RenderCopy(renderer, texture, &sourceRect, &desRect);
+    sourceRect.x = clips[frame/20].x;
+    sourceRect.y = clips[frame/20].y;
+    sourceRect.h = clips[frame/20].h;
+    sourceRect.w = clips[frame/20].w;
+    desRect.w = sourceRect.w;
+    desRect.h = sourceRect.h;
+    frame++;
+    if(frame/20 >= ENEMY_FRAMES) frame =0;
+    SDL_RenderCopy(renderer, texture, &sourceRect, &desRect);
 }
 
 int Enemy::randomNumber() {
-    srand(time(0));
     return rand() % 4;
 }
 

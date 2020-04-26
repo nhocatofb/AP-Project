@@ -7,6 +7,10 @@ struct Enemy {
     SDL_Rect sourceRect;
     SDL_Rect desRect;
     SDL_Texture* texture;
+    static const int ENEMY_FRAMES = 2;
+    const string IMG = "img/enemy.bmp";
+    SDL_Rect clips[ENEMY_FRAMES];
+    int frame = 0;
     int stepX=0;
     int stepY=0;
 
