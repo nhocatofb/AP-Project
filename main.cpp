@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Bomb.h"
 #include "Enemy.h"
+#include "wall.h"
 
 int main(int argc, char* argv[]) {
     SDL_Window* window;
@@ -9,11 +10,13 @@ int main(int argc, char* argv[]) {
     initSDL(window, renderer);
     Player player;
     Enemy enemy1;
+    Wall wall(renderer);
     player.loadTexture("img/character.bmp", renderer);
     enemy1.create(renderer);
     while(player.die==false) {
         srand(time(0));
         setBackGround(renderer);
+        wall.render(renderer);
         player.bomb.render(renderer);
         player.render(renderer);
         enemy1.render(renderer);

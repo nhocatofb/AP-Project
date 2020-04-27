@@ -52,13 +52,13 @@
 1586969619 c:\users\admin\desktop\c++\demosdl\enemy.h
 	"SDL_utils.h"
 
-1587920936 source:c:\users\admin\desktop\c++\ap-project\bomb.cpp
+1587870902 source:c:\users\admin\desktop\c++\ap-project\bomb.cpp
 	"Bomb.h"
 
-1587894914 c:\users\admin\desktop\c++\ap-project\bomb.h
+1587870902 c:\users\admin\desktop\c++\ap-project\bomb.h
 	"SDL_utils.h"
 
-1587396587 c:\users\admin\desktop\c++\ap-project\sdl_utils.h
+1587870902 c:\users\admin\desktop\c++\ap-project\sdl_utils.h
 	<SDL.h>
 	<SDL_image.h>
 	<cstring>
@@ -66,25 +66,32 @@
 	<cstdlib>
 	<ctime>
 
-1587761447 source:c:\users\admin\desktop\c++\ap-project\enemy.cpp
+1587870902 source:c:\users\admin\desktop\c++\ap-project\enemy.cpp
 	"Enemy.h"
 
-1587754423 c:\users\admin\desktop\c++\ap-project\enemy.h
+1587870902 c:\users\admin\desktop\c++\ap-project\enemy.h
 	"SDL_utils.h"
 
-1587921182 source:c:\users\admin\desktop\c++\ap-project\main.cpp
+1588001581 source:c:\users\admin\desktop\c++\ap-project\main.cpp
 	"SDL_utils.h"
 	"player.h"
 	"Bomb.h"
 	"Enemy.h"
+	"wall.h"
 
-1587399996 c:\users\admin\desktop\c++\ap-project\player.h
+1587870902 c:\users\admin\desktop\c++\ap-project\player.h
 	"SDL_utils.h"
 	"Bomb.h"
 
-1587724196 source:c:\users\admin\desktop\c++\ap-project\player.cpp
+1587870902 source:c:\users\admin\desktop\c++\ap-project\player.cpp
 	"player.h"
 
-1587722989 source:c:\users\admin\desktop\c++\ap-project\sdl_utils.cpp
+1587870902 source:c:\users\admin\desktop\c++\ap-project\sdl_utils.cpp
+	"SDL_utils.h"
+
+1587933170 source:c:\users\admin\desktop\c++\ap-project\wall.cpp
+	"wall.h"
+
+1587931191 c:\users\admin\desktop\c++\ap-project\wall.h
 	"SDL_utils.h"
 
