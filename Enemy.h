@@ -14,7 +14,7 @@ struct Enemy {
     int stepX=0;
     int stepY=0;
 
-    void create(SDL_Renderer *renderer);
+    Enemy(SDL_Renderer *renderer);
     void render(SDL_Renderer *renderer) ;
 
     bool canMoveRight();

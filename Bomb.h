@@ -3,6 +3,7 @@
 
 #include "SDL_utils.h"
 
+
 struct Bomb {
     SDL_Rect sourceRect, explode_sourceRect;
     SDL_Rect desRect, explode_desRect;

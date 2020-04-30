@@ -7,9 +7,11 @@
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
+#include<vector>
+#include<fstream>
 
-const int SCREEN_HEIGHT = 600;
-const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 640;
+const int SCREEN_WIDTH = 1140;
 
 using namespace std;
 
@@ -19,5 +21,6 @@ void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
 void waitUntilKeyPressed();
 void setBackGround(SDL_Renderer *renderer);
 bool impact(SDL_Rect a, SDL_Rect b);
+
 
 #endif // SDL_utils__h

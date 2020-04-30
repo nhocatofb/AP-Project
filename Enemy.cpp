@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-void Enemy::create(SDL_Renderer *renderer) {
+Enemy::Enemy(SDL_Renderer *renderer) {
     SDL_Surface* surface = SDL_LoadBMP(IMG.c_str());
     Uint32 colorKey = SDL_MapRGB(surface->format, 255, 255, 255);
     SDL_SetColorKey(surface, SDL_TRUE, colorKey);
@@ -22,8 +22,8 @@ void Enemy::render(SDL_Renderer *renderer) {
     sourceRect.y = clips[frame/20].y;
     sourceRect.h = clips[frame/20].h;
     sourceRect.w = clips[frame/20].w;
-    desRect.w = sourceRect.w;
-    desRect.h = sourceRect.h;
+    desRect.w = sourceRect.w*4/5;
+    desRect.h = sourceRect.h*4/5;
     frame++;
     if(frame/20 >= ENEMY_FRAMES) frame =0;
     SDL_RenderCopy(renderer, texture, &sourceRect, &desRect);

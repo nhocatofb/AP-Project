@@ -37,16 +37,16 @@ void waitUntilKeyPressed() {
 }
 
 void setBackGround(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 180, 180, 180, 255);
+    SDL_SetRenderDrawColor(renderer, 230, 255, 255, 255);
     SDL_RenderClear(renderer);
 }
 
-bool impact(SDL_Rect a, SDL_Rect b) {
-    if((a.x+a.w >= b.x && a.x+a.w <= b.x+b.w) && (a.y+a.h >= b.y && a.y+a.h <= b.y+b.h)) return true;
-    if((a.x >= b.x && a.x <= b.x+b.w) && (a.y+a.h >= b.y && a.y+a.h <= b.y+b.h)) return true;
-    if((a.x+a.w >= b.x && a.x+a.w <= b.x+b.w) && (a.y >= b.y && a.y <= b.y+b.h)) return true;
-    if((a.x >= b.x && a.x <= b.x+b.w) && (a.y >= b.y && a.y <= b.y+b.h)) return true;
+bool impact(SDL_Rect _a, SDL_Rect _b) {
+    SDL_Rect a = _a;
+    SDL_Rect b = _b;
+    if(SDL_HasIntersection(&a, &b)==SDL_TRUE) return true;
     return false;
 }
+
 
 
