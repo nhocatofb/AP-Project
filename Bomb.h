@@ -2,7 +2,10 @@
 #define BOMB_H
 
 #include "SDL_utils.h"
+#include "Enemy.h"
+#include "wall.h"
 
+struct Player;
 
 struct Bomb {
     SDL_Rect sourceRect, explode_sourceRect;
@@ -21,6 +24,7 @@ struct Bomb {
     void create(SDL_Renderer *renderer, int _x, int _y);
     void render(SDL_Renderer *renderer) ;
     void explode(SDL_Renderer *renderer);
+    void destroy(Player *player, Enemy enemy, Wall wall);
 };
 
 

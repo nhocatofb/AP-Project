@@ -89,3 +89,40 @@ void Player::event(SDL_Window *window, SDL_Renderer* renderer){
     }
 }
 
+void Bomb::destroy(Player *player, Enemy enemy, Wall wall) {
+    for(int i=0; i<5; i++) {
+        explode_sourceRect.x = explode_clips[i][frame/10].x;
+        explode_sourceRect.y = explode_clips[i][frame/10].y;
+        explode_sourceRect.h = explode_clips[i][frame/10].h;
+        explode_sourceRect.w = explode_clips[i][frame/10].w;
+        explode_desRect.w = explode_sourceRect.w;
+        explode_desRect.h = explode_sourceRect.h;
+        switch(i) {
+            case 0: {
+                explode_desRect.x = desRect.x;
+                explode_desRect.y = desRect.y;
+                break;
+            }
+            case 1: {
+                explode_desRect.x = desRect.x;
+                explode_desRect.y = desRect.y-explode_desRect.h;
+                break;
+            }
+            case 2: {
+                explode_desRect.x = desRect.x-desRect.w;
+                explode_desRect.y = desRect.y;
+                break;
+            }
+            case 3: {
+                explode_desRect.x = desRect.x+desRect.w;
+                explode_desRect.y = desRect.y;
+                break;
+            }
+            case 4: {
+                explode_desRect.x = desRect.x;
+                explode_desRect.y = desRect.y+explode_desRect.h;
+                break;
+            }
+        }
+    }
+}

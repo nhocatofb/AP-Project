@@ -18,6 +18,10 @@ Enemy::Enemy(SDL_Renderer *renderer) {
 }
 
 void Enemy::render(SDL_Renderer *renderer) {
+    if(alive==false) {
+        SDL_DestroyTexture(texture);
+        return;
+    }
     sourceRect.x = clips[frame/20].x;
     sourceRect.y = clips[frame/20].y;
     sourceRect.h = clips[frame/20].h;
@@ -30,36 +34,56 @@ void Enemy::render(SDL_Renderer *renderer) {
 }
 
 int Enemy::randomNumber() {
-    return rand() % 4;
+    if(rdNumber<50-2) rdNumber = rand() % 50 + 1;
+    else if(rdNumber>50 && rdNumber<100) rdNumber = rand()%50+50 +1;
+    else if(rdNumber>100 && rdNumber<150) rdNumber = rand()%50+100 +1;
+    else if(rdNumber>150 && rdNumber<200) rdNumber = rand()%50+150 +1;
+    else rdNumber = rand() % 200 + 1;
+    return rdNumber;
 }
 
 void Enemy::move() {
-    if(randomNumber() == 0 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveRight();
-    else if (randomNumber() == 1 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveUp();
-    else if (randomNumber() == 2 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveLeft();
-    else if (randomNumber() == 3 && inside(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)==true) moveDown();
+    if(randomNumber() <= 50 && inside()==true) moveRight();
+    else if (randomNumber() <= 100 && inside()==true) moveUp();
+    else if (randomNumber() <= 150 && inside()==true) moveLeft();
+    else if (randomNumber() <= 200 && inside()==true) moveDown();
     desRect.x += stepX;
     desRect.y += stepY;
+    if(inside()==false) {
+        moveBack();
+        rdNumber = rand() % 200 + 1;
+    }
 }
 
 void Enemy::moveRight() {
         stepX=2;
         stepY=0;
+        just_move = "right";
 }
 void Enemy::moveLeft() {
         stepX= -2;
         stepY=0;
+        just_move = "left";
 }
 void Enemy::moveUp() {
         stepX=0;
         stepY=-2;
+        just_move = "up";
 }
 void Enemy::moveDown() {
         stepX=0;
         stepY=2;
+        just_move = "down";
 }
 
-bool Enemy::inside(int minX, int minY, int maxX, int maxY) {
-    return (desRect.x>=minX && desRect.y>=minY && desRect.x+desRect.w<=maxX && desRect.y+desRect.h<=maxY);
+void Enemy::moveBack() {
+    if(just_move=="right") moveLeft();
+    else if(just_move=="left") moveRight();
+    else if(just_move=="up") moveDown();
+    else if(just_move=="down")  moveUp();
+}
+
+bool Enemy::inside() {
+    return (desRect.x>=0 && desRect.y>=0 && desRect.x+desRect.w<= SCREEN_WIDTH && desRect.y+desRect.h<=SCREEN_HEIGHT);
 }
 
