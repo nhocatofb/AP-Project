@@ -7,65 +7,129 @@ Player::Player(string path, SDL_Renderer *renderer) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
         SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
+
+        for(int i=0; i<FRAMES_H; i++) {
+            for(int j=0; j<FRAMES_W; j++) {
+                clips[i][j].x = sourceRect.w*j/FRAMES_W;
+                clips[i][j].y = sourceRect.h*i/FRAMES_H;
+                clips[i][j].w = sourceRect.w/FRAMES_W;
+                clips[i][j].h = sourceRect.h/FRAMES_H;
+            }
+        }
+
         desRect.x = firstX;
         desRect.y = firstY;
-        sourceRect.x = 0;
-        sourceRect.y = 0;
-        desRect.w = sourceRect.w;
-        desRect.h = sourceRect.h;
 }
 
 void Player::render(SDL_Renderer *renderer) {
+    if(frame == FRAMES_W) frame =0;
+    sourceRect.x = clips[just_move][frame].x;
+    sourceRect.y = clips[just_move][frame].y;
+    sourceRect.h = clips[just_move][frame].h;
+    sourceRect.w = clips[just_move][frame].w;
+    desRect.w = sourceRect.w;
+    desRect.h = sourceRect.h;
     SDL_RenderCopy(renderer, texture, &sourceRect, &desRect);
+    if(inside()==false) moveBack();
+    if(frame==0) black_list = -1;
 }
 
 void Player::moveRight() {
-    just_move = "right";
-    desRect.x +=stepX;
+    if(black_list!=0) {
+        just_move = 0;
+        desRect.x +=stepX;
+    }
+    frame++;
 }
 void Player::moveLeft() {
-    just_move = "left";
-    desRect.x -=stepX;
+    if(black_list!=1) {
+        just_move = 1;
+        desRect.x -=stepX;
+    }
+    frame++;
 }
 void Player::moveUp() {
-    just_move = "up";
-    desRect.y -=stepY;
+    if(black_list!=2) {
+        just_move = 2;
+        desRect.y -=stepY;
+    }
+    frame++;
 }
 void Player::moveDown() {
-    just_move = "down";
-    desRect.y +=stepY;
+    if(black_list!=3) {
+        just_move = 3;
+        desRect.y +=stepY;
+    }
+    frame++;
 }
 
 void Player::moveBack() {
-    if(just_move=="right") moveLeft();
-    else if(just_move=="left") moveRight();
-    else if(just_move=="up") moveDown();
-    else if(just_move=="down")  moveUp();
-    else ;
+    if(just_move==0) {
+        moveLeft();
+        black_list = 0;
+    }
+    else if(just_move==1) {
+        moveRight();
+        black_list = 1;
+    }
+    else if(just_move==2) {
+        moveDown();
+        black_list = 2;
+    }
+    else if(just_move==3)  {
+        moveUp();
+        black_list = 3;
+    }
 }
 
-void Player::createBomb(SDL_Renderer *renderer) {
-    bomb.create(renderer, desRect.x, desRect.y);
+void Player::shoot(SDL_Renderer* renderer) {
+    if(number_of_bullet_shooted<amount_of_bullets) {
+        if(just_move==0) {
+            bullet[number_of_bullet_shooted].create(renderer, desRect.x+desRect.w+1, desRect.y);
+            bullet[number_of_bullet_shooted].moveRight();
+        }
+        else if(just_move==1) {
+            bullet[number_of_bullet_shooted].create(renderer, desRect.x-20, desRect.y);
+            bullet[number_of_bullet_shooted].moveLeft();
+        }
+        else if(just_move==2) {
+            bullet[number_of_bullet_shooted].create(renderer, desRect.x, desRect.y-20);
+            bullet[number_of_bullet_shooted].moveUp();
+        }
+        else if(just_move==3) {
+            bullet[number_of_bullet_shooted].create(renderer, desRect.x, desRect.y+desRect.h+1);
+            bullet[number_of_bullet_shooted].moveDown();
+        }
+        number_of_bullet_shooted++;
+    }
 }
 
 void Player::createWall_top(SDL_Renderer *renderer) {
-    wall[number_of_wall_created].create(renderer, desRect.x, desRect.y-wall[0].desRect.h-1);
-    number_of_wall_created++;
+    if(number_of_wall_created<amount_of_walls) {
+        wall[number_of_wall_created].create(renderer, desRect.x, desRect.y-wall[0].desRect.h-1);
+        number_of_wall_created++;
+    }
 }
 
 void Player::createWall_bot(SDL_Renderer *renderer) {
-    wall[number_of_wall_created].create(renderer, desRect.x, desRect.y+desRect.h+1);
-    number_of_wall_created++;
+    if(number_of_wall_created<amount_of_walls) {
+        wall[number_of_wall_created].create(renderer, desRect.x, desRect.y+desRect.h+1);
+        number_of_wall_created++;
+    }
 }
 
 void Player::createWall_left(SDL_Renderer *renderer) {
-    wall[number_of_wall_created].create(renderer, desRect.x-wall[0].desRect.w-1, desRect.y);
-    number_of_wall_created++;
+    if(number_of_wall_created<amount_of_walls) {
+        wall[number_of_wall_created].create(renderer, desRect.x-wall[0].desRect.w-1, desRect.y);
+        number_of_wall_created++;
+    }
 }
 
 void Player::createWall_rigth(SDL_Renderer *renderer) {
-    wall[number_of_wall_created].create(renderer, desRect.x+desRect.w+1, desRect.y);
-    number_of_wall_created++;
+    if(number_of_wall_created<amount_of_walls) {
+        wall[number_of_wall_created].create(renderer, desRect.x+desRect.w+1, desRect.y);
+        number_of_wall_created++;
+    }
 }
 
 void Player::event(SDL_Window *window, SDL_Renderer* renderer){
@@ -79,7 +143,7 @@ void Player::event(SDL_Window *window, SDL_Renderer* renderer){
         case SDLK_RIGHT: moveRight(); break;
         case SDLK_UP: moveUp(); break;
         case SDLK_DOWN: moveDown(); break;
-        case SDLK_SPACE: createBomb(renderer); break;
+        case SDLK_SPACE: shoot(renderer); break;
         case SDLK_w: createWall_top(renderer); break;
         case SDLK_a: createWall_left(renderer); break;
         case SDLK_d: createWall_rigth(renderer); break;
@@ -89,40 +153,6 @@ void Player::event(SDL_Window *window, SDL_Renderer* renderer){
     }
 }
 
-void Bomb::destroy(Player *player, Enemy enemy, Wall wall) {
-    for(int i=0; i<5; i++) {
-        explode_sourceRect.x = explode_clips[i][frame/10].x;
-        explode_sourceRect.y = explode_clips[i][frame/10].y;
-        explode_sourceRect.h = explode_clips[i][frame/10].h;
-        explode_sourceRect.w = explode_clips[i][frame/10].w;
-        explode_desRect.w = explode_sourceRect.w;
-        explode_desRect.h = explode_sourceRect.h;
-        switch(i) {
-            case 0: {
-                explode_desRect.x = desRect.x;
-                explode_desRect.y = desRect.y;
-                break;
-            }
-            case 1: {
-                explode_desRect.x = desRect.x;
-                explode_desRect.y = desRect.y-explode_desRect.h;
-                break;
-            }
-            case 2: {
-                explode_desRect.x = desRect.x-desRect.w;
-                explode_desRect.y = desRect.y;
-                break;
-            }
-            case 3: {
-                explode_desRect.x = desRect.x+desRect.w;
-                explode_desRect.y = desRect.y;
-                break;
-            }
-            case 4: {
-                explode_desRect.x = desRect.x;
-                explode_desRect.y = desRect.y+explode_desRect.h;
-                break;
-            }
-        }
-    }
+bool Player::inside() {
+    return (desRect.x>=0 && desRect.y>=0 && desRect.x+desRect.w<= SCREEN_WIDTH && desRect.y+desRect.h<=SCREEN_HEIGHT);
 }

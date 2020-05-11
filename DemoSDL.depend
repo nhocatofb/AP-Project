@@ -52,15 +52,15 @@
 1586969619 c:\users\admin\desktop\c++\demosdl\enemy.h
 	"SDL_utils.h"
 
-1588331092 source:c:\users\admin\desktop\c++\ap-project\bomb.cpp
+1588715339 source:c:\users\admin\desktop\c++\ap-project\bomb.cpp
 	"Bomb.h"
 
-1588331052 c:\users\admin\desktop\c++\ap-project\bomb.h
+1588607400 c:\users\admin\desktop\c++\ap-project\bomb.h
 	"SDL_utils.h"
 	"Enemy.h"
 	"wall.h"
 
-1588191403 c:\users\admin\desktop\c++\ap-project\sdl_utils.h
+1589153141 c:\users\admin\desktop\c++\ap-project\sdl_utils.h
 	<SDL.h>
 	<SDL_image.h>
 	<cstring>
@@ -68,34 +68,62 @@
 	<cstdlib>
 	<ctime>
 	<vector>
+	<sstream>
 	<fstream>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
 
-1588354548 source:c:\users\admin\desktop\c++\ap-project\enemy.cpp
+1589036908 source:c:\users\admin\desktop\c++\ap-project\enemy.cpp
 	"Enemy.h"
 
-1588350752 c:\users\admin\desktop\c++\ap-project\enemy.h
+1589036558 c:\users\admin\desktop\c++\ap-project\enemy.h
 	"SDL_utils.h"
+	"explode.h"
 
-1588349938 source:c:\users\admin\desktop\c++\ap-project\main.cpp
+1589125733 source:c:\users\admin\desktop\c++\ap-project\main.cpp
 	"SDL_utils.h"
 	"player.h"
-	"Bomb.h"
 	"Enemy.h"
+	"people.h"
+	"explode.h"
 
-1588320010 c:\users\admin\desktop\c++\ap-project\player.h
+1589154571 c:\users\admin\desktop\c++\ap-project\player.h
 	"SDL_utils.h"
-	"Bomb.h"
 	"wall.h"
+	"player.h"
+	"bullet.h"
 
-1588331092 source:c:\users\admin\desktop\c++\ap-project\player.cpp
+1589115739 source:c:\users\admin\desktop\c++\ap-project\player.cpp
 	"player.h"
 
-1588190462 source:c:\users\admin\desktop\c++\ap-project\sdl_utils.cpp
+1588606117 source:c:\users\admin\desktop\c++\ap-project\sdl_utils.cpp
 	"SDL_utils.h"
 
-1588264609 source:c:\users\admin\desktop\c++\ap-project\wall.cpp
+1589037852 source:c:\users\admin\desktop\c++\ap-project\wall.cpp
 	"player.h"
 
-1588319997 c:\users\admin\desktop\c++\ap-project\wall.h
+1589145943 c:\users\admin\desktop\c++\ap-project\wall.h
+	"SDL_utils.h"
+	"explode.h"
+
+1589124451 source:c:\users\admin\desktop\c++\ap-project\people.cpp
+	"people.h"
+
+1589053727 c:\users\admin\desktop\c++\ap-project\people.h
+	"SDL_utils.h"
+	"explode.h"
+
+1589039956 source:c:\users\admin\desktop\c++\ap-project\bullet.cpp
+	"bullet.h"
+	"player.h"
+
+1589039595 c:\users\admin\desktop\c++\ap-project\bullet.h
+	"SDL_utils.h"
+	"explode.h"
+
+1589040561 source:c:\users\admin\desktop\c++\ap-project\explode.cpp
+	"explode.h"
+
+1589131038 c:\users\admin\desktop\c++\ap-project\explode.h
 	"SDL_utils.h"
 

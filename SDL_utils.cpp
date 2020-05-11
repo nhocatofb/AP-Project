@@ -1,6 +1,9 @@
 #include "SDL_utils.h"
 
-const string WINDOW_TITLE = "Demo SDL by LoAnhDuc";
+const string WINDOW_TITLE = "The Virus";
+const string WELCOME = "img/welcome.bmp";
+const string LOSE = "img/lose.bmp";
+const string VICTORY = "img/victory.bmp";
 
 void logSDLError(ostream &os, const string &msg, bool fatal) {
     os << msg << " Error: " << SDL_GetError() << endl;
@@ -17,13 +20,19 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer) {
     if(window == nullptr) logSDLError(cout, "Create Window", true);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if(renderer == nullptr) logSDLError(cout, "Create Renderer", true);
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) logSDLError(cout, "Mixer", true);
+    Mix_Music* music = nullptr;
+    music = Mix_LoadMUS("audio/nhacnen.mp3");
+    Mix_PlayMusic(music, -1);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    if (TTF_Init() < 0) cout << TTF_GetError() << endl;
 }
 
 void quitSDL(SDL_Window* window, SDL_Renderer* renderer){
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -48,5 +57,79 @@ bool impact(SDL_Rect _a, SDL_Rect _b) {
     return false;
 }
 
+void welcome(SDL_Renderer* renderer) {
+    SDL_Rect desRect, sourceRect;
+    desRect.x = desRect.y = 0;
+    desRect.w = SCREEN_WIDTH;
+    desRect.h = SCREEN_HEIGHT;
+    SDL_Surface* surface = IMG_Load(WELCOME.c_str());
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
 
+    SDL_Color fg = { 243, 156, 18 };
+    TTF_Font* font = TTF_OpenFont("C:/WINDOWS/FONTS/ARIAL.TTF", 20);
+    surface = TTF_RenderText_Solid(font, "The Virus", fg);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    desRect.x = 400; desRect.y = 50;
+    desRect.w = 400; desRect.h = 100;
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    surface = TTF_RenderText_Solid(font, "Press anykey to start game", fg);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    desRect.x = 450; desRect.y = 550;
+    desRect.w = 300; desRect.h = 50;
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    SDL_RenderPresent(renderer);
+    waitUntilKeyPressed();
+}
+
+void lose(SDL_Renderer* renderer) {
+    SDL_Rect desRect, sourceRect;
+    desRect.x = desRect.y = 0;
+    desRect.w = SCREEN_WIDTH;
+    desRect.h = SCREEN_HEIGHT;
+    SDL_Surface* surface = IMG_Load(LOSE.c_str());
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    SDL_Color fg = { 243, 156, 18 };
+    TTF_Font* font = TTF_OpenFont("C:/WINDOWS/FONTS/ARIAL.TTF", 20);
+    surface = TTF_RenderText_Solid(font, "Press anykey to quit game", fg);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    desRect.x = 450; desRect.y = 550;
+    desRect.w = 300; desRect.h = 50;
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    SDL_RenderPresent(renderer);
+    waitUntilKeyPressed();
+}
+
+void win(SDL_Renderer* renderer) {
+    SDL_Rect desRect, sourceRect;
+    desRect.x = desRect.y = 0;
+    desRect.w = SCREEN_WIDTH;
+    desRect.h = SCREEN_HEIGHT;
+    SDL_Surface* surface = IMG_Load(VICTORY.c_str());
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    SDL_Color fg = { 243, 156, 18 };
+    TTF_Font* font = TTF_OpenFont("C:/WINDOWS/FONTS/ARIAL.TTF", 20);
+    surface = TTF_RenderText_Solid(font, "Press anykey to quit game", fg);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    desRect.x = 450; desRect.y = 550;
+    desRect.w = 300; desRect.h = 50;
+    SDL_RenderCopy(renderer, texture, NULL, &desRect);
+
+    SDL_RenderPresent(renderer);
+    waitUntilKeyPressed();
+}
 

@@ -31,13 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Bomb.cpp" />
-		<Unit filename="Bomb.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
 		<Unit filename="SDL_utils.cpp" />
 		<Unit filename="SDL_utils.h" />
+		<Unit filename="bullet.cpp" />
+		<Unit filename="bullet.h" />
+		<Unit filename="explode.cpp" />
+		<Unit filename="explode.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="people.cpp" />
+		<Unit filename="people.h" />
 		<Unit filename="player.cpp" />
 		<Unit filename="player.h" />
 		<Unit filename="wall.cpp" />
