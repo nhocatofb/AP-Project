@@ -1,5 +1,4 @@
 # AP-Project
 Game học phần lập trình nâng cao
-Tên game: Đặt bom
-Nội dung: Người chơi điều khiển nhân vật đặt các quả bom phát nổ để tiêu diệt kẻ địch.
-          Kẻ địch di chuyển ngẫu nhiên trên bản đồ
+Tên game: The Virus
+Nội dung: Ngôi làng của bạn đang bị tấn công bởi 1 loại virus kì lạ, hãy xây dựng các bức tường để cách ly xã hội. Bên cạnh đó ném những quả bom để tiêu diệt virus. Nhưng hãy cẩn thận. Bomb có thể tiêu diệt cả những người dân, bức tường và gây hiệu ứng nổ chùm.
