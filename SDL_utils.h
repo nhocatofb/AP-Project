@@ -24,7 +24,7 @@ void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
 void waitUntilKeyPressed();
 void setBackGround(SDL_Renderer *renderer);
 bool impact(SDL_Rect a, SDL_Rect b);
-void welcome(SDL_Renderer* renderer);
+void welcome(SDL_Renderer* renderer, int &level);
 void lose(SDL_Renderer* renderer);
 void win(SDL_Renderer* renderer);
 

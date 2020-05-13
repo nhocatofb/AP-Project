@@ -10,11 +10,14 @@ struct Bullet {
     SDL_Texture* texture;
     Explode explode;
 
-    int stepX=10, stepY=0;
+    int stepX=7, stepY=0;
     const string IMG = "img/bomb.bmp";
     bool destroy = false;
     string just_move;
     int speed = 1;
+    static const int frames = 2;
+    int frame = 0;
+    SDL_Rect clips[frames];
 
     void create(SDL_Renderer* renderer, int _x, int _y);
     void render(SDL_Renderer *renderer) ;
@@ -24,7 +27,6 @@ struct Bullet {
     void moveUp();
     void moveDown();
     bool inside();
-    void moveBack();
 };
 
 

@@ -7,8 +7,8 @@ void Enemy::create(SDL_Renderer *renderer) {
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
     SDL_QueryTexture(texture, nullptr, nullptr, &sourceRect.w, &sourceRect.h);
-    desRect.x = SCREEN_WIDTH*2/3;
-    desRect.y = SCREEN_HEIGHT/2;
+    desRect.x = 1160;
+    desRect.y = rand()%500+1;
     for(int i=0; i<ENEMY_FRAMES; i++) {
         clips[i].x = sourceRect.w*i/ENEMY_FRAMES;
         clips[i].y = 0;
@@ -37,7 +37,7 @@ void Enemy::render(SDL_Renderer *renderer) {
 }
 
 void Enemy::randomNumber() {
-    if(rdNumber<20) rdNumber = rand() % 20 + 1;
+    if(rdNumber<10) rdNumber = rand() % 20 + 1;
     else if(rdNumber>20 && rdNumber<40) rdNumber = rand()%20+20 +1;
     else if(rdNumber>40 && rdNumber<60) rdNumber = rand()%20+40 +1;
     else if(rdNumber>60 && rdNumber<80) rdNumber = rand()%20+60 +1;

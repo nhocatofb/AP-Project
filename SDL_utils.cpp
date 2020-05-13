@@ -46,7 +46,7 @@ void waitUntilKeyPressed() {
 }
 
 void setBackGround(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 230, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 199, 248, 226, 255);
     SDL_RenderClear(renderer);
 }
 
@@ -57,7 +57,7 @@ bool impact(SDL_Rect _a, SDL_Rect _b) {
     return false;
 }
 
-void welcome(SDL_Renderer* renderer) {
+void welcome(SDL_Renderer* renderer, int &level) {
     SDL_Rect desRect, sourceRect;
     desRect.x = desRect.y = 0;
     desRect.w = SCREEN_WIDTH;
@@ -76,15 +76,26 @@ void welcome(SDL_Renderer* renderer) {
     desRect.w = 400; desRect.h = 100;
     SDL_RenderCopy(renderer, texture, NULL, &desRect);
 
-    surface = TTF_RenderText_Solid(font, "Press anykey to start game", fg);
+    surface = TTF_RenderText_Solid(font, "<--basic level       advantage level-->", fg);
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
-    desRect.x = 450; desRect.y = 550;
-    desRect.w = 300; desRect.h = 50;
+    desRect.x = 350; desRect.y = 550;
+    desRect.w = 500; desRect.h = 50;
     SDL_RenderCopy(renderer, texture, NULL, &desRect);
-
     SDL_RenderPresent(renderer);
-    waitUntilKeyPressed();
+    SDL_Event e;
+    while (true) {
+        if (SDL_WaitEvent(&e) != 0 && (e.type == SDL_KEYDOWN)) {
+            switch (e.key.keysym.sym) {
+            case SDLK_ESCAPE: break;
+            case SDLK_LEFT: level = 2; break;
+            case SDLK_RIGHT: level = 1; break;
+            default: break;
+            }
+            return;
+        }
+        SDL_Delay(100);
+    }
 }
 
 void lose(SDL_Renderer* renderer) {

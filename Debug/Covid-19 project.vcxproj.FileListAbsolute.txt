@@ -1,0 +1,2 @@
+C:\Users\admin\Desktop\C++\Covid-19 project\Debug\Covid-19 project.exe
+C:\Users\admin\Desktop\C++\Covid-19 project\Debug\Covid-19 project.pdb

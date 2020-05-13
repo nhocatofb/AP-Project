@@ -3,9 +3,10 @@
 #include "Enemy.h"
 #include "people.h"
 #include "explode.h"
+#include "map.h"
 
-const int amout_of_enemys = 40;
-const int amout_of_people = 20;
+const int amout_of_enemys = 100;
+const int amout_of_people = 50;
 
 void renderScore(SDL_Renderer* renderer, int score);
 
@@ -15,8 +16,10 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer;
     initSDL(window, renderer);
     int score = 0;
-    welcome(renderer);
+    int level = -1;
+    welcome(renderer, level);
 
+    map Map(renderer);
     Player player("img/character.bmp", renderer);
     Enemy enemy[amout_of_enemys];
     for (int i = 0; i < amout_of_enemys; i++) {
@@ -26,7 +29,7 @@ int main(int argc, char* argv[]) {
 
     People people[amout_of_people];
     for (int i = 0; i < amout_of_people; i++) {
-        people[i].create(renderer);
+        people[i].create(renderer, level);
     }
 
     while(player.die==false) {
@@ -34,8 +37,9 @@ int main(int argc, char* argv[]) {
 
         setBackGround(renderer);
         renderScore(renderer, score);
-        
+        Map.render(renderer);
         player.render(renderer);
+
         for(int i=0; i<player.number_of_bullet_shooted; i++) {
             player.bullet[i].render(renderer);
             if(impact(player.desRect, player.bullet[i].desRect)==true) player.die = true;
@@ -44,46 +48,38 @@ int main(int argc, char* argv[]) {
             if (people[i].desRect.w != 0) break;
             if (i == amout_of_people - 1) player.die = true;
         }
+
     //Xu ly buc tuong
         for(int i=0; i<player.number_of_wall_created; i++) {
             player.wall[i].render(renderer);
-            if(impact(player.desRect, player.wall[i].desRect)==true) player.moveBack();
-            for(int j=0; j<player.number_of_bullet_shooted; j++) {
-                if(impact(player.wall[i].desRect, player.bullet[j].desRect)==true) {
-                    player.wall[i].destroy = true;
-                    player.bullet[j].destroy = true;
-                }
-            }
-
+            if (impact(player.desRect, player.wall[i].desRect) == true) player.moveBack();
         }
     //xu ly nguoi dan
         for(int i=0; i<amout_of_people; i++) {
             people[i].render(renderer);
-            people[i].move();
-            for(int j=0; j<amout_of_people; j++) {
-                if (people[i].explode.destroy(people[j].desRect, people[i].desRect.x, people[i].desRect.y) == true)
-                    people[j].alive = false;                    
-                if (impact(people[i].desRect, people[j].desRect) == true && (people[i].HP < 200 || people[j].HP < 200 )&&i!=j)
+            people[i].move(Map);
+            for (int j = 0; j<player.number_of_bullet_shooted; j++) {
+                if (impact(people[i].desRect, player.bullet[j].desRect) == true) {
+                    people[i].rdNumber=50;
+                    if (rand() % 4 == 0) people[i].infected = false;
+                    player.bullet[j].destroy = true;
+                }
+            }
+            for(int j=i+1; j<amout_of_people; j++) {                 
+                if (impact(people[i].desRect, people[j].desRect) == true && (people[i].infected==true|| people[j].infected==true) && rand()%people[i].rate==1)
                     people[i].infected = people[j].infected = true;
             }
             for(int j=0; j<player.number_of_wall_created; j++) {
                 if (impact(people[i].desRect, player.wall[j].desRect) == true) {
                     people[i].moveBack();
-                    player.wall[j].frame++;
-                }
-            }
-            for(int j=0; j<player.number_of_bullet_shooted; j++) {
-                if(impact(people[i].desRect, player.bullet[j].desRect)==true) {
-                    people[i].alive = false;
-                    player.bullet[j].destroy = true;  
-                    score--;
+                    if(rand()%20==0) player.wall[j].frame++;
                 }
             }
             if (people[i].alive == false) countPeople--;
         }
     //xu ly ke dich
-        if(count_enemy<amout_of_enemys*300) count_enemy++;
-        for(int i=0; i<count_enemy/300; i++) {
+        if(count_enemy<amout_of_enemys*level*150) count_enemy++;
+        for(int i=0; i<count_enemy/(level*150); i++) {
             enemy[i].render(renderer);
             enemy[i].move();
             for(int j=0; j<count_enemy/200; j++) {
